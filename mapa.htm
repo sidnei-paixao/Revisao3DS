@@ -1,0 +1,66 @@
+<html>
+
+<style>
+BODY
+{
+	margin: 0;
+  background: url(brasil.png) no-repeat;
+	background-size: contain;
+	background-position: center center;
+}
+#Detalhe
+{
+	background: #FFFFFF;
+	position: absolute;
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	align-items: center;
+	justify-content: center;
+}
+#Detalhe IMG
+{
+  max-width: 100%;
+  max-height: 100%;
+}
+</style>
+
+<body>
+
+	<div id="Detalhe">
+		<img id="imgEstado" src="saopaulo.png" onDrop="fnSoltar(event)" onDragOver="event.preventDefault()" />
+	<div>
+
+</body>
+
+<script>
+function fnSoltar(oEvt)
+{
+	oEvt.preventDefault();
+	let oArquivo = new FileReader();
+	
+	if(oEvt.dataTransfer.files)
+		if(oEvt.dataTransfer.files.length > 0)
+		{
+			oArquivo.readAsDataURL(oEvt.dataTransfer.files[0]);
+			console.log(oEvt.dataTransfer.files[0]);
+		}
+		else
+			if(oEvt.dataTransfer.getData('text/html').length > 0)
+			{
+				let cImagem = oEvt.dataTransfer.getData('text/html').substr(oEvt.dataTransfer.getData('text/html').indexOf('src=') + 5);
+				cImagem = cImagem.substr(0, cImagem.indexOf('"'));
+				document.all.imgEstado.style.background = 'url(' + cImagem + ')';
+			}
+	
+	
+	
+	oArquivo.onload = function()
+	{
+		document.all.imgEstado.style.background = 'url(' + oArquivo.result + ')';
+	}
+}
+</script>
+
+</html>
