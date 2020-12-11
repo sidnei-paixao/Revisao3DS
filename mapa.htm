@@ -1,12 +1,16 @@
 <html>
 
+<head>
+	<meta charset="utf-8" />
+</head>
+
 <style>
 BODY
 {
 	margin: 0;
-  background: url(brasil.png) no-repeat;
+  /*background: url(brasil.png) no-repeat;
 	background-size: contain;
-	background-position: center center;
+	background-position: center center;*/
 }
 #Detalhe
 {
@@ -26,11 +30,25 @@ BODY
 }
 </style>
 
-<body>
+<script src="regexImagemExterna.js"></script>
 
-	<div id="Detalhe">
+<body usemap="objCliqueMapa">
+
+	<img src="brasil.png" usemap="#objCliqueMapa" />
+	
+	<div id="Detalhe" style="display: none">
 		<img id="imgEstado" src="saopaulo.png" onDrop="fnSoltar(event)" onDragOver="event.preventDefault()" />
 	<div>
+	
+	<map name="objCliqueMapa">
+    <area target="" alt="São Paulo" title="São Paulo" href="SP" coords="486,558,468,581,459,597,445,608,481,611,487,617,503,616,518,646,514,654,529,654,538,667,580,636,589,641,606,630,598,622,613,616,603,610,586,613,576,619,567,607,571,588,560,587,557,564,521,564,519,557" shape="poly">
+    <area target="" alt="Rio de Janeiro" title="Rio de Janeiro" href="RJ" coords="605,610,624,601,635,605,649,600,658,580,677,591,676,605,659,611,654,623,626,625,618,621,605,628,602,620,612,615" shape="poly">
+    <area target="" alt="Pernambuco" title="Pernambuco" href="PE" coords="686,330,703,322,700,305,721,306,731,316,753,317,769,309,777,313,769,324,777,330,786,321,805,318,816,315,809,346,798,342,783,351,770,348,759,340,749,346,725,332,701,349" shape="poly">
+    <area target="" alt="Alagoas" title="Alagoas" href="AL" coords="746,347,782,375,808,345,799,340,781,349,759,339" shape="poly">
+    <area target="" alt="Sergipe" title="Sergipe" href="SE" coords="752,357,756,366,751,377,745,377,752,393,760,396,767,382,781,374,765,357" shape="poly">
+    <area target="" alt="Paraíba" title="Paraíba" href="PA" coords="743,287,739,299,743,307,737,312,754,315,766,307,774,310,770,321,777,327,786,317,805,316,817,314,814,294,787,288,784,299,767,293,771,282,759,287,752,289" shape="poly">
+    <area target="" alt="Rio Grande do Norte" title="Rio Grande do Norte" href="RN" coords="770,257,762,261,751,278,744,280,755,288,770,281,768,292,785,298,787,289,813,293,808,268,784,263" shape="poly">
+</map>
 
 </body>
 
@@ -49,9 +67,14 @@ function fnSoltar(oEvt)
 		else
 			if(oEvt.dataTransfer.getData('text/html').length > 0)
 			{
+				/*
+				//alert(arrumador(oEvt.dataTransfer.getData('text/html')));
+				alert(fnExtraiImagem(oEvt.dataTransfer.getData('text/html')));
 				let cImagem = oEvt.dataTransfer.getData('text/html').substr(oEvt.dataTransfer.getData('text/html').indexOf('src=') + 5);
 				cImagem = cImagem.substr(0, cImagem.indexOf('"'));
 				document.all.imgEstado.style.background = 'url(' + cImagem + ')';
+				*/
+				document.all.imgEstado.style.background = 'url(' + fnExtraiImagem(oEvt.dataTransfer.getData('text/html')) + ')';
 			}
 	
 	
